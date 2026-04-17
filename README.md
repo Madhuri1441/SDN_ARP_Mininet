@@ -70,52 +70,61 @@ mininet>
 ### Test 1 — View Topology
 
 **nodes**
+```bash
 mininet> nodes
-available nodes are:
-c0 h1 h2 h3 s1
-
-**net**
+available nodes are: c0 h1 h2 h3 s1
+```
+net
+```bash
 mininet> net
 h1 h1-eth0:s1-eth1
 h2 h2-eth0:s1-eth2
 h3 h3-eth0:s1-eth3
-s1 lo: s1-eth1:h1-eth0 s1-eth2:h2-eth0 s1-eth3:h3-eth0
+s1 lo:
+s1-eth1:h1-eth0
+s1-eth2:h2-eth0
+s1-eth3:h3-eth0
 c0
-
-**dump**
+```
+dump
+```bash
 mininet> dump
-<Host h1: h1-eth0:10.0.0.1 pid=3043>
-<Host h2: h2-eth0:10.0.0.2 pid=3045>
-<Host h3: h3-eth0:10.0.0.3 pid=3047>
 <OVSSwitch s1: lo:127.0.0.1,s1-eth1:None,s1-eth2:None,s1-eth3:None pid=3052>
 <RemoteController c0: 127.0.0.1:6633 pid=3035>
-3 hosts (h1, h2, h3) connected to 1 switch (s1), managed by remote POX controller at 127.0.0.1:6633.
-
-![App Screenshot](Screenshot 2026-04-17 101251.png)
----
-
-### Test 2 — Full Connectivity Test (pingall)
+3 hosts (h1, h2, h3) connected to 1 switch (s1), managed by remote POX controller at 127.0.0.1:6633
+```
+![Screenshot](screenshot2.png)
+Test 2 — Full Connectivity Test (pingall)
+```bash
 mininet> pingall
+
 *** Ping: testing ping reachability
 h1 -> h2 h3
 h2 -> h1 h3
 h3 -> h1 h2
-*** Results: 0% dropped (6/6 received)
-All 6 packets received with 0% packet loss — ARP handling by POX controller is working correctly.
-![App Screenshot](Screenshot 2026-04-17 101157.png)
----
 
-### Test 3 — Individual Host Ping
+*** Results: 0% dropped (6/6 received)
+```
+![Screenshot](screenshot1.png)
+All 6 packets were received with 0% packet loss, confirming correct ARP handling by the POX controller.
+
+Test 3 — Individual Host Ping
+```bash
 mininet> h1 ping h2 -c 4
+
 PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=8.65 ms
 64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=3.85 ms
 64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=4.67 ms
 64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=3.49 ms
+
 --- 10.0.0.2 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3013ms
+4 packets transmitted, 4 received, 0% packet loss, time 3013 ms
 rtt min/avg/max/mdev = 3.492/5.165/8.651/2.057 ms
-h1 successfully communicates with h2. ARP resolution handled by controller, 0% packet loss confirmed.
+```
+h1 successfully communicates with h2. ARP resolution is handled by the controller, and 0% packet loss is observed.
+
+---
 
 ## Cleanup
 ```bash
@@ -129,4 +138,3 @@ sudo mn -c
 - Mininet: http://mininet.org
 - POX Controller: https://github.com/noxrepo/pox
 - OpenFlow Specification: https://opennetworking.org/software-defined-standards/specifications/
----
