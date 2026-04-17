@@ -94,6 +94,7 @@ mininet> dump
 3 hosts (h1, h2, h3) connected to 1 switch (s1), managed by remote POX controller at 127.0.0.1:6633
 ```
 ![Screenshot](screenshot2.png)
+
 Test 2 — Full Connectivity Test (pingall)
 ```bash
 mininet> pingall
@@ -106,6 +107,7 @@ h3 -> h1 h2
 *** Results: 0% dropped (6/6 received)
 ```
 ![Screenshot](screenshot1.png)
+
 All 6 packets were received with 0% packet loss, confirming correct ARP handling by the POX controller.
 
 Test 3 — Individual Host Ping
