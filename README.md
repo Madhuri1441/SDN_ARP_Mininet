@@ -65,6 +65,73 @@ mininet>
 
 ---
 
+# SDN ARP Handling in Mininet using POX Controller
+
+## Problem Statement
+Implement ARP request and reply handling using an SDN (Software Defined Networking) controller.
+The POX controller intercepts ARP packets, logs ARP requests, and floods them so destination hosts can respond.
+This demonstrates controller-switch interaction and flow rule design using OpenFlow.
+
+---
+
+## Prerequisites
+- Ubuntu 20.04 / 22.04
+- Python 3.10
+- Mininet installed
+- POX controller
+
+---
+
+## Setup & Execution
+
+### Step 1 — Install Mininet
+```bash
+sudo apt update
+sudo apt install mininet -y
+```
+
+### Step 2 — Clone POX Controller
+```bash
+cd ~/Desktop
+git clone https://github.com/noxrepo/pox.git
+```
+
+### Step 3 — Copy Controller Script
+```bash
+cp arp_controller.py ~/Desktop/pox/
+```
+
+### Step 4 — Run POX Controller (Terminal 1)
+```bash
+cd ~/Desktop/pox
+python3 pox.py arp_controller
+```
+
+Expected output:
+POX 0.7.0 (gar) / Copyright 2011-2020 James McCauley, et al.
+INFO:arp_controller:Simple ARP + Flood Controller Started
+INFO:core:POX 0.7.0 (gar) is up.
+INFO:openflow.of_01:[00-00-00-00-00-01 2] connected
+
+### Step 5 — Run Mininet (Terminal 2)
+```bash
+sudo mn --controller=remote --topo=single,3
+```
+
+Expected output:
+*** Creating network
+*** Adding controller
+*** Adding hosts: h1 h2 h3
+*** Adding switches: s1
+*** Adding links: (h1, s1) (h2, s1) (h3, s1)
+*** Configuring hosts
+*** Starting controller c0
+*** Starting 1 switches s1
+*** Starting CLI
+mininet>
+
+---
+
 ## Mininet Output & Verification
 
 ### Test 1 — View Topology
@@ -165,3 +232,4 @@ sudo mn -c
 - Mininet: http://mininet.org
 - POX Controller: https://github.com/noxrepo/pox
 - OpenFlow Specification: https://opennetworking.org/software-defined-standards/specifications/
+---
